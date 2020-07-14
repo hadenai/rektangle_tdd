@@ -27,5 +27,9 @@ RSpec.describe './rektangle' do
       let(:command) { 'ruby ./rektangle.rb 3 -1' }
       it { expect(output).to include('ArgumentSignError') }
     end
+    context 'when height is over 9000' do
+      let(:command) { 'ruby ./rektangle.rb 3 9001' }
+      it { expect(output).to include('ArgumentTooBigError') }
+    end
   end
 end
