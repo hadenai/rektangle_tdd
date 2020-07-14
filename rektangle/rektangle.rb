@@ -1,34 +1,43 @@
 class Rektangle
-  def initialize(width, height)
+  DEFAULT_SHAPES = %w[A B C D .]
+
+def shapes_valid?
+@shapes.length == 5
+end
+
+  def initialize(width, height, *shapes)
     @width = width
     @height = height
+    @shapes = shapes
+    @shapes = shapes.empty? ? DEFAULT_SHAPES : shapes
+    @top_left, @top_right, @bottom_right, @bottom_left, @border = @shapes
   end
 
 
 def draw_top_line
   top_line = ''
-  top_line << 'A'
+  top_line << @top_left
   return top_line + "\n" if @width == 1
   (@width - 2).times do
-    top_line << '.'
+    top_line << @border
   end
-  top_line << "B\n"
+  top_line << "#{@top_right}\n"
 end
 
 def draw_bottom_line
   bottom_line = ''
-  bottom_line << 'D'
+  bottom_line << @bottom_left
   return bottom_line + "\n" if @width == 1
   (@width - 2).times do
-    bottom_line << '.'
+    bottom_line << @border
   end
-  bottom_line << "C\n"
+  bottom_line << "#{@bottom_right}\n"
 end
 
 def draw_middle_line
-  return "./n" if @width == 1
+  return "#{@border}/n" if @width == 1
   middle_line = ' ' * (@width - 2)
-  '.' + middle_line + ".\n"
+  "#{@border}" + middle_line + "#{@border}\n"
 end
 
 def draw_middle_lines
@@ -41,7 +50,7 @@ def draw_middle_lines
 end
 
   def draw
-  return "A\n" if @width == 1 && @height == 1
+  return "#{@top_left}\n" if @width == 1 && @height == 1
   return draw_top_line if @height == 1
   top_line = draw_top_line
   middle_lines = draw_middle_lines
