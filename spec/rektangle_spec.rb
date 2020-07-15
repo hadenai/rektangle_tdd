@@ -43,5 +43,15 @@ RSpec.describe './rektangle' do
       let(:command) { 'ruby ./rektangle.rb 4 5 56' }
       it { expect(output).to include('ShapeLengthIncorrectError') }
     end
+    context 'when -h option is given' do
+      let(:command) { 'ruby ./rektangle.rb -h' }
+      it { expect(output).to include('Help Menu') }
+      it { expect(output).to include('Rektangle by Seybol') }
+    end
+    context 'when --help option is given' do
+      let(:command) { 'ruby ./rektangle.rb --help' }
+      it { expect(output).to include('Help Menu') }
+      it { expect(output).to include('Rektangle by Seybol') }
+    end
   end
 end
